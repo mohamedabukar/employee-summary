@@ -1,0 +1,26 @@
+{
+  "name": "employee-summary",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohamedabukar/employee-summary.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohamedabukar/employee-summary/issues"
+  },
+  "homepage": "https://github.com/mohamedabukar/employee-summary#readme",
+  "dependencies": {
+    "jest": "^27.0.6"
+  }
+}
