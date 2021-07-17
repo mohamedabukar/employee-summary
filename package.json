@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/mohamedabukar/employee-summary#readme",
   "dependencies": {
+    "fs": "0.0.1-security",
+    "inquirer": "^8.1.2",
     "jest": "^27.0.6"
   }
 }
