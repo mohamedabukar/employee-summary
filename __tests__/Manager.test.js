@@ -44,3 +44,4 @@ describe("Manager", () => {
             expect(obj.getRole()).toEqual("Manager");
         });
     })});
+    

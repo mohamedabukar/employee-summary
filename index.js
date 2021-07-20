@@ -5,6 +5,7 @@ const Engineer = require("./lib/Engineer");
 const inquirer = require("inquirer");
 const fs = require('fs');
 
+let responses = [];
 const managerQuestions = [
     {
         type: "input",
@@ -26,6 +27,7 @@ const managerQuestions = [
         message: "What is your office number?",
         name: "officeNumber"
     }
+
 ]
 
 
@@ -34,6 +36,7 @@ inquirer
     .then(managerResponse => {
 
         const manager = new Manager(managerResponse.name, managerResponse.id, managerResponse.email, managerResponse.officeNumber);
+        responses.push(manager);
         console.log(manager);
         options();
     })
@@ -64,6 +67,7 @@ const engineerQuestions = () => {
         ])
         .then(engineerResponse => {
             const engineer = new Engineer(engineerResponse.name, engineerResponse.id, engineerResponse.email, engineerResponse.github);
+            responses.push(engineer);
             console.log(engineer);
             options();
         })
@@ -88,39 +92,14 @@ const internQuestions = () => {
             },
 
         ])
-        .then(internResponse =>{
+        .then(internResponse => {
             const intern = new Intern(internResponse.name, internResponse.id, internResponse.email, internResponse.school);
+            responses.push(intern);
             console.log(intern);
             options();
         })
 }
 
-const writeToFile = (managerResponse) => {
-    var writeFile=
-`<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="employee.css">
-    <title>Employee Summary</title>
-</head>
-<body>
-    <h1 class="header">My team</h1>
-    <section class="employees">
-        <div class="manager">
-            <p>${managerResponse.name}<p>
-            <p>${managerResponse.id}<p>
-            <p>${managerResponse.email}<p>
-            <p>${managerResponse.officeNumber}<p>
-        </div>
-`;
-        fs.writeFile(writeFile, (err) => {
-            if (err) throw err;
-            console.log("Saved.");
-        })
-    }
 
 
 
@@ -144,12 +123,87 @@ const options = () => {
                     internQuestions();
                     break;
                 case "Finish building my team":
-                    writeToFile("employee.HTML", writeFile);
+                    writeToFile();
                     break;
                 default: console.log("???");
             }
 
         })
+}
+var htmlTeam = []
+function writeToFile() {
+    //console.log(responses)
+    //$(".managerName").text(responses.manager.name);
+    for(let i = 0; i < responses.length; i++){
+        console.log(responses[i])
+        console.log("Role:" +  responses[i].getRole())
+        //if role =  engineer, then create a var html block of code for engineer
+        if(responses[i].getRole() === "Engineer"){
+            let engineerCode = 
+            `
+            <div class="engineer">
+            <p class="engineerName">${responses[i].getname()}</p>
+            <p class="engineerId">${responses[i].getId()}</p>
+            <p class= "engineerEmail">${responses[i].getEmail()}</p>
+            <p class= "engineerGithub">${responses[i].getGithub()}</p>
+        </div>
+            `
+            htmlTeam.push(engineerCode)
+        }
+        //push it to htmlTeam
+        //if role =  intern, then create a var html block of code for intern
+        if(responses[i].getRole() === "Intern"){
+            let internCode = 
+            `
+            <div class="intern">
+            <p class="internName">${responses[i].getname()}</p>
+            <p class="intern">${responses[i].getId()}</p>
+            <p class= "internEmail">${responses[i].getEmail()}</p>
+            <p class= "internSchool">${responses[i].getSchool()}</p>
+        </div>
+            `
+            htmlTeam.push(internCode)
+        }
+        //if role =  manager, then create a var html block of code for manager
+        if(responses[i].getRole() === "Manager"){
+            let managerCode = 
+            `
+            <div class="manager">
+            <p class="managerName">${responses[i].getname()}</p>
+            <p class="manager">${responses[i].getId()}</p>
+            <p class= "managerEmail">${responses[i].getEmail()}</p>
+            <p class= "managerOffice">${responses[i].getOfficeNumber()}</p>
+        </div>
+            `
+            htmlTeam.push(managerCode)
+        }
+
+        
+       
+        
+    }
+    const joinedHtml = htmlTeam.join("");
+    console.log(htmlTeam.join("")) ;
+    const html = 
+    `
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="employee.css">
+<title>Employee Summary</title>
+</head>
+<body>
+${joinedHtml}
+</body>
+</html>
+    `
+    fs.writeFile("dist/employee.html", html, (err) => {
+        if (err) throw err;
+        console.log('The file has been saved!');
+      });;
 }
 
 
