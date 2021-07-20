@@ -38,6 +38,13 @@ describe("Manager", () => {
             });
         });
     });
+    describe("getOfficeNumber", () => {
+        it("Should return office number via getOfficeNumber()", () => {
+            const obj = new Manager("mohamed", 3, "target@email.com", 4);
+
+            expect(obj.getOfficeNumber()).toEqual(4);
+        })
+    })
     describe("getRole()", () => {
         it("should return employee role via getRole()", () => {
             const obj = new Manager("mohamed")

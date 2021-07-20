@@ -90,6 +90,11 @@ const internQuestions = () => {
                 message: "What is your email?",
                 name: "email"
             },
+            {
+                type: "input",
+                message: "Which school did you go to?",
+                name: "school"
+            }
 
         ])
         .then(internResponse => {
@@ -141,11 +146,12 @@ function writeToFile() {
         if(responses[i].getRole() === "Engineer"){
             let engineerCode = 
             `
-            <div class="engineer">
-            <p class="engineerName">${responses[i].getname()}</p>
-            <p class="engineerId">${responses[i].getId()}</p>
-            <p class= "engineerEmail">${responses[i].getEmail()}</p>
-            <p class= "engineerGithub">${responses[i].getGithub()}</p>
+        <div class="engineer col-4">
+            <h2>Engineer<h2>
+            <p class="engineerName">Name: ${responses[i].getname()}</p>
+            <p class="engineerId">Id: ${responses[i].getId()}</p>
+            <p class= "engineerEmail">Email: ${responses[i].getEmail()}</p>
+            <p class= "engineerGithub">Github: ${responses[i].getGithub()}</p>
         </div>
             `
             htmlTeam.push(engineerCode)
@@ -155,11 +161,12 @@ function writeToFile() {
         if(responses[i].getRole() === "Intern"){
             let internCode = 
             `
-            <div class="intern">
-            <p class="internName">${responses[i].getname()}</p>
-            <p class="intern">${responses[i].getId()}</p>
-            <p class= "internEmail">${responses[i].getEmail()}</p>
-            <p class= "internSchool">${responses[i].getSchool()}</p>
+        <div class="intern col-4">
+            <h2>Intern<h2>
+            <p class="internName">Name: ${responses[i].getname()}</p>
+            <p class="internId">Id: ${responses[i].getId()}</p>
+            <p class= "internEmail">Email: ${responses[i].getEmail()}</p>
+            <p class= "internSchool">School: ${responses[i].getSchool()}</p>
         </div>
             `
             htmlTeam.push(internCode)
@@ -168,11 +175,12 @@ function writeToFile() {
         if(responses[i].getRole() === "Manager"){
             let managerCode = 
             `
-            <div class="manager">
-            <p class="managerName">${responses[i].getname()}</p>
-            <p class="manager">${responses[i].getId()}</p>
-            <p class= "managerEmail">${responses[i].getEmail()}</p>
-            <p class= "managerOffice">${responses[i].getOfficeNumber()}</p>
+        <div class="manager col-4">
+            <h2>Manager<h2>
+            <p class="managerName">Name: ${responses[i].getname()}</p>
+            <p class="managerId">Id: ${responses[i].getId()}</p>
+            <p class= "managerEmail">Email: ${responses[i].getEmail()}</p>
+            <p class= "managerOffice">Office: ${responses[i].getOfficeNumber()}</p>
         </div>
             `
             htmlTeam.push(managerCode)
@@ -186,17 +194,22 @@ function writeToFile() {
     console.log(htmlTeam.join("")) ;
     const html = 
     `
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="employee.css">
-<title>Employee Summary</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="employee.css">
+    <title>Employee Summary</title>
 </head>
 <body>
-${joinedHtml}
+    <section class= "row">
+        ${joinedHtml}
+    </section>
 </body>
 </html>
     `
