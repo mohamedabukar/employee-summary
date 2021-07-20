@@ -4,11 +4,7 @@
 .header{
     text-align: center;
 }
-.manager{
-    margin:1px;
-    border: black;
-}
-.engineer{
-    margin:1px;
-    border: black;
+
+.intern{
+    margin-top: 10%;
 }
